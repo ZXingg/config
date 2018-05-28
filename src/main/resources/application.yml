@@ -70,6 +70,7 @@ eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${ali.server.host}:${server.port}
+    ip-address: ${ali.server.host}
 
 #actuate-endpoint
 management:
