@@ -1,0 +1,79 @@
+#server
+server:
+  port: 8888
+
+#ali server host
+ali:
+  server:
+    host: 47.100.173.161
+
+#config-server
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          label: overrides
+          uri: https://github.com/ZXingg/spring_cloud_mall_config_repo
+          username:
+          password:
+          basedir: ${classpath:}/basedir
+#          clone-on-start: true
+        #config-client 共同属性
+        overrides:
+          ali:
+            server:
+              host: 47.100.173.161
+          spring:
+            #rabbitmq
+            rabbitmq:
+              username: guest
+              password: guest
+              port: 8672
+              host: 47.100.173.161
+
+            #datasource
+            datasource:
+              driver-class-name: com.mysql.jdbc.Driver
+              username: root
+              password: z101496x
+              url: jdbc:mysql://47.100.173.161:3306/spring_cloud_mall?characterEncoding=utf-8&useSSL=false
+              type: com.alibaba.druid.pool.DruidDataSource
+              initial-size: 2
+              min-idle: 2
+              max-active: 15
+            #jpa
+            jpa:
+              show-sql: true  #FIXME
+              format-sql: true
+
+  #rabbitmq
+  rabbitmq:
+    username: guest
+    password: guest
+    port: 8672
+    host: ${ali.server.host}
+
+  #security
+  security:
+    user:
+      name: user
+      password: user
+
+#eureka-client
+eureka:
+  client:
+    service-url:
+      defaultZone: http://dream96.top:8761/eureka/  #http://eureka1:8761/eureka/,http://eureka2:8762/eureka/
+  instance:
+    prefer-ip-address: true
+
+#actuate-endpoint
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
