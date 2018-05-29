@@ -33,7 +33,17 @@ spring:
               password: guest
               port: 8672
               host: 47.100.173.161
-
+            #redis
+            redis:
+              host: 47.100.173.161
+              port: 6379
+              password: z101496x
+              jedis:
+                pool:
+                  min-idle: 1
+                  max-active: 100
+                  max-idle: 50
+                  max-wait: 10
             #datasource
             datasource:
               driver-class-name: com.mysql.jdbc.Driver
@@ -70,7 +80,7 @@ eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${ali.server.host}:${server.port}
-    ip-address: ${ali.server.host}
+    ip-address: ${ali.server.host}    #真实ip
 
 #actuate-endpoint
 management:
